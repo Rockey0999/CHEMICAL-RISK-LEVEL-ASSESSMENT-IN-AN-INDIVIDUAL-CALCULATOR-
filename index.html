@@ -88,6 +88,26 @@
             width: 100%;
             bottom: 0;
         }
+        #data-container {
+            background: #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .data-table th, .data-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #007acc;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -144,6 +164,10 @@
                 <div class="chart-container">
                     <canvas id="risk-graph" width="400" height="200"></canvas>
                 </div>
+            </div>
+            <div class="card">
+                <h2>Collected Data</h2>
+                <div id="data-container"></div>
             </div>
         </div>
     </div>
@@ -215,6 +239,9 @@
 
             // Generate graph
             generateGraph(qsarRisk, calculatedRisk);
+
+            // Update collected data section
+            updateDataContainer();
         });
 
         // Get risk classification
@@ -247,6 +274,40 @@
                     }
                 }
             });
+        }
+
+        // Update collected data section
+        function updateDataContainer() {
+            const dataContainer = document.getElementById('data-container');
+            let tableHtml = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Chemical</th>
+                            <th>Age</th>
+                            <th>Body Weight</th>
+                            <th>Concentration</th>
+                            <th>Exposure</th>
+                            <th>LD50</th>
+                            <th>Calculated Risk Level</th>
+                            <th>QSAR Risk Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>${document.getElementById('chemical').value}</td>
+                            <td>${document.getElementById('age').value}</td>
+                            <td>${document.getElementById('body-weight').value}</td>
+                            <td>${document.getElementById('concentration').value}</td>
+                            <td>${document.getElementById('exposure').value}</td>
+                            <td>${document.getElementById('ld50').value}</td>
+                            <td>${(document.getElementById('calculated-risk').textContent)}</td>
+                            <td>${(document.getElementById('qsar-risk').textContent)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            dataContainer.innerHTML = tableHtml;
         }
     </script>
 </body>
