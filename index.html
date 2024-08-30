@@ -3,250 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chemical Risk Assessment - National Science Expo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f0f8ff;
-            color: #333;
-        }
-        header {
-            background-color: #007acc;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 {
-            font-size: 2em;
-            margin: 0;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-        }
-        .card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-            padding: 20px;
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: scale(1.05);
-        }
-        h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        p {
-            margin-bottom: 10px;
-        }
-        .form-group, .form-group label, .form-group input, .form-group select, .form-group button {
-            margin: 0.5rem 0;
-        }
-        .form-group input, .form-group select, .form-group button {
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .form-group button {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .form-group button:hover {
-            background-color: #218838;
-        }
-        .chart-container {
-            position: relative;
-            height: 400px;
-            width: 100%;
-        }
-        canvas {
-            display: block;
-            margin: 0 auto;
-        }
-        footer {
-            background-color: #007acc;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
+    <title>Chemical Risk Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
-        <h1>Chemical Risk Assessment - National Science Expo</h1>
-        <p>Under the Topic: Mathematical Modeling and Computational Thinking</p>
+        <h1>Chemical Risk Assessment</h1>
     </header>
 
-    <div class="container">
-        <div class="card">
-            <h2>Risk Level Calculator</h2>
-            <div class="form-group">
-                <label for="chemical">Select Chemical:</label>
-                <select id="chemical">
-                    <option value="" disabled selected>Select a chemical</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="age">Age (years):</label>
-                <input type="number" id="age" min="0">
-            </div>
-            <div class="form-group">
-                <label for="body-weight">Body Weight (kg):</label>
-                <input type="number" id="body-weight" min="0">
-            </div>
-            <div class="form-group">
-                <label for="concentration">Concentration (c) in mg/kg:</label>
-                <input type="number" id="concentration" step="any">
-            </div>
-            <div class="form-group">
-                <label for="exposure">Exposure (e) in kg/day:</label>
-                <input type="number" id="exposure" step="any">
-            </div>
-            <div class="form-group">
-                <label for="ld50">LD50 of Chemical (mg/kg):</label>
-                <input type="number" id="ld50" step="any">
-            </div>
-            <button id="calculate">Calculate Risk</button>
-            <div id="results">
-                <h2>Results</h2>
-                <p><strong>QSAR Predicted Risk Level:</strong> <span id="qsar-risk"></span></p>
-                <p><strong>Calculated Risk Level:</strong> <span id="calculated-risk"></span></p>
-                <p><strong>Risk Level Classification:</strong> <span id="risk-classification"></span></p>
-            </div>
-            <div id="chemical-details">
-                <h2>Chemical Details</h2>
-                <p><strong>Description:</strong> <span id="description"></span></p>
-                <p><strong>Diseases Caused:</strong> <span id="diseases"></span></p>
-                <p><strong>Solution:</strong> <span id="solution"></span></p>
-            </div>
-            <div id="graph">
-                <h2>Graphical Analysis</h2>
-                <div class="chart-container">
-                    <canvas id="risk-graph"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Chemical Details and Risk Levels</h2>
-            <p>Select a chemical to view details:</p>
-            <select id="chemicalSelect" onchange="updateChemicalDetails()">
-                <option value="Caffeine">Caffeine</option>
-                <option value="Aspartame">Aspartame</option>
-                <option value="Sodium Benzoate">Sodium Benzoate</option>
-                <!-- Add more options here -->
+    <main>
+        <section>
+            <h2>Select Chemical</h2>
+            <select id="chemicalSelect">
+                <option value="" disabled selected>Select a Chemical</option>
+                <!-- Options will be populated dynamically -->
             </select>
-            <div id="chemicalDetails"></div>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2>Interactive Simulation</h2>
-            <div id="simulator">
-                <h3>Input Parameters</h3>
-                <label for="substance-concentration">Substance Concentration (c):</label>
-                <input type="number" id="substance-concentration" name="substance-concentration" value="100">
-                
-                <label for="exposure">Exposure (e):</label>
-                <input type="number" id="exposure" name="exposure" value="5">
-                
-                <label for="body-mass">Body Mass (kg):</label>
-                <input type="number" id="body-mass" name="body-mass" value="70">
-                
-                <label for="bmr">Basal Metabolic Rate (BMR):</label>
-                <input type="number" id="bmr" name="bmr" value="900">
-                
-                <label for="time-exposed">Time Exposed (hours):</label>
-                <input type="number" id="time-exposed" name="time-exposed" value="24">
-                
-                <button onclick="calculateRisk()">Calculate Risk</button>
+        <section id="chemical-info">
+            <h2>Chemical Information</h2>
+            <div id="chemicalDetails">
+                <!-- Chemical details will be displayed here -->
             </div>
-        </div>
-    </div>
+        </section>
+
+        <section id="risk-assessment">
+            <h2>Risk Assessment</h2>
+            <form id="riskForm">
+                <label for="concentration">Concentration (c) [mg/kg]:</label>
+                <input type="number" id="concentration" step="any" required>
+
+                <label for="exposure">Exposure (e) [kg/day]:</label>
+                <input type="number" id="exposure" step="any" required>
+
+                <label for="bodyWeight">Body Weight [kg]:</label>
+                <input type="number" id="bodyWeight" step="any" required>
+
+                <label for="ld50">LD50 Value [mg/kg]:</label>
+                <input type="number" id="ld50" step="any" required>
+
+                <button type="button" id="calculateRisk">Calculate Risk</button>
+            </form>
+
+            <h3>Calculated Risk Level</h3>
+            <p id="riskClassification">Please select a chemical and enter data.</p>
+
+            <h3>Comparison Chart</h3>
+            <canvas id="riskChart"></canvas>
+        </section>
+    </main>
 
     <footer>
-        &copy; 2024 National Science Expo - Chemical Risk Assessment
+        <p>&copy; 2024 Chemical Risk Assessment</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const chemicalData = {
             "Caffeine": {
                 "ld50": 192,
                 "qsarRisk": 0.05,
+                "experimentalRisk": 0.04,
                 "details": {
-                    "Description": "Caffeine is a stimulant found in coffee, tea, and various other products.",
-                    "Diseases": "May cause insomnia, nervousness, restlessness, stomach irritation.",
-                    "Solution": "Limit intake of caffeinated beverages."
+                    "Description": "A central nervous system stimulant.",
+                    "Diseases": "Potential for addiction and anxiety.",
+                    "Solution": "Limit intake and avoid excessive use."
                 }
             },
             "Aspartame": {
                 "ld50": 5000,
                 "qsarRisk": 0.01,
+                "experimentalRisk": 0.005,
                 "details": {
-                    "Description": "Aspartame is an artificial sweetener used in many low-calorie products.",
-                    "Diseases": "May cause headaches or allergic reactions in some individuals.",
-                    "Solution": "Monitor intake if sensitive to aspartame."
+                    "Description": "A low-calorie sweetener.",
+                    "Diseases": "Possible risk of headaches and allergic reactions.",
+                    "Solution": "Use in moderation."
                 }
             },
-            // Add more chemicals as needed...
+            // Add other chemicals similarly
         };
 
-        // Populate the chemical dropdown
-        const chemicalSelect = document.getElementById('chemical');
-        for (const chemical in chemicalData) {
-            const option = document.createElement('option');
-            option.value = chemical;
-            option.textContent = chemical;
-            chemicalSelect.appendChild(option);
+        function populateChemicalOptions() {
+            const select = document.getElementById('chemicalSelect');
+            for (const chemical in chemicalData) {
+                const option = document.createElement('option');
+                option.value = chemical;
+                option.textContent = chemical;
+                select.appendChild(option);
+            }
         }
 
-        // Calculate risk level
-        document.getElementById('calculate').addEventListener('click', () => {
-            const chemical = document.getElementById('chemical').value;
-            const age = parseFloat(document.getElementById('age').value);
-            const bodyWeight = parseFloat(document.getElementById('body-weight').value);
+        document.getElementById('chemicalSelect').addEventListener('change', updateChemicalDetails);
+
+        function updateChemicalDetails() {
+            const chemical = document.getElementById('chemicalSelect').value;
+            if (chemical) {
+                const details = chemicalData[chemical].details;
+                document.getElementById('chemicalDetails').innerHTML = `
+                    <h3>${chemical}</h3>
+                    <p><strong>Description:</strong> ${details.Description}</p>
+                    <p><strong>Diseases Caused:</strong> ${details.Diseases}</p>
+                    <p><strong>Solution:</strong> ${details.Solution}</p>
+                `;
+            }
+        }
+
+        document.getElementById('calculateRisk').addEventListener('click', function () {
+            const chemical = document.getElementById('chemicalSelect').value;
             const concentration = parseFloat(document.getElementById('concentration').value);
             const exposure = parseFloat(document.getElementById('exposure').value);
+            const bodyWeight = parseFloat(document.getElementById('bodyWeight').value);
             const ld50 = parseFloat(document.getElementById('ld50').value);
 
-            if (!chemical || isNaN(age) || isNaN(bodyWeight) || isNaN(concentration) || isNaN(exposure) || isNaN(ld50)) {
+            if (!chemical || isNaN(concentration) || isNaN(exposure) || isNaN(bodyWeight) || isNaN(ld50)) {
                 alert('Please fill in all fields.');
                 return;
             }
 
             const qsarRisk = chemicalData[chemical].qsarRisk;
             const calculatedRisk = (concentration * exposure) / (bodyWeight * ld50);
-            const riskClassification = calculatedRisk < 0.01 ? 'Low Risk' : 'High Risk';
+            const riskClassification = calculatedRisk < 0.01 ? 'Low Risk' : (calculatedRisk < 0.1 ? 'Moderate Risk' : 'High Risk');
 
-            document.getElementById('qsar-risk').textContent = qsarRisk;
-            document.getElementById('calculated-risk').textContent = calculatedRisk.toFixed(4);
-            document.getElementById('risk-classification').textContent = riskClassification;
+            document.getElementById('riskClassification').textContent = `Calculated Risk Level: ${riskClassification}`;
 
-            // Update chemical details
-            const details = chemicalData[chemical].details;
-            document.getElementById('description').textContent = details.Description;
-            document.getElementById('diseases').textContent = details.Diseases;
-            document.getElementById('solution').textContent = details.Solution;
-
-            // Update the chart
             updateChart(qsarRisk, calculatedRisk);
         });
 
         function updateChart(qsarRisk, calculatedRisk) {
-            const ctx = document.getElementById('risk-graph').getContext('2d');
+            const ctx = document.getElementById('riskChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -269,17 +153,8 @@
             });
         }
 
-        // Update chemical details based on selection
-        function updateChemicalDetails() {
-            const selectedChemical = document.getElementById('chemicalSelect').value;
-            const chemicalDetails = chemicalData[selectedChemical].details;
-            document.getElementById('chemicalDetails').innerHTML = `
-                <h3>${selectedChemical}</h3>
-                <p><strong>Description:</strong> ${chemicalDetails.Description}</p>
-                <p><strong>Diseases Caused:</strong> ${chemicalDetails.Diseases}</p>
-                <p><strong>Solution:</strong> ${chemicalDetails.Solution}</p>
-            `;
-        }
+        // Initialize the page
+        populateChemicalOptions();
     </script>
 </body>
 </html>
