@@ -122,7 +122,31 @@
                 <label for="chemical">Select Chemical:</label>
                 <select id="chemical">
                     <option value="" disabled selected>Select a chemical</option>
-                    <!-- Options will be added by JavaScript -->
+                    <option value="Caffeine">Caffeine</option>
+                    <option value="Aspartame">Aspartame</option>
+                    <option value="Sodium Benzoate">Sodium Benzoate</option>
+                    <option value="Paracetamol">Paracetamol</option>
+                    <option value="Nicotine">Nicotine</option>
+                    <option value="Sodium Nitrite">Sodium Nitrite</option>
+                    <option value="Monosodium Glutamate">Monosodium Glutamate (MSG)</option>
+                    <option value="Saccharin">Saccharin</option>
+                    <option value="Acesulfame K">Acesulfame K</option>
+                    <option value="Cyclamate">Cyclamate</option>
+                    <option value="Ibuprofen">Ibuprofen</option>
+                    <option value="Acetaminophen">Acetaminophen (Paracetamol)</option>
+                    <option value="Ethanol">Ethanol</option>
+                    <option value="Benzene">Benzene</option>
+                    <option value="Formaldehyde">Formaldehyde</option>
+                    <option value="Propylene Glycol">Propylene Glycol</option>
+                    <option value="Methanol">Methanol</option>
+                    <option value="Toluene">Toluene</option>
+                    <option value="Chlorpyrifos">Chlorpyrifos</option>
+                    <option value="Atrazine">Atrazine</option>
+                    <option value="Glyphosate">Glyphosate</option>
+                    <option value="DDT">DDT</option>
+                    <option value="Lead Acetate">Lead Acetate</option>
+                    <option value="Sodium Fluoride">Sodium Fluoride</option>
+                    <option value="Thalidomide">Thalidomide</option>
                 </select>
             </div>
             <div class="form-group">
@@ -194,126 +218,227 @@
                     "Solution": "Monitor intake if sensitive to aspartame."
                 }
             },
-            // Add more chemicals as needed...
+            "Sodium Benzoate": {
+                "ld50": 4070,
+                "qsarRisk": 0.02,
+                "details": {
+                    "Description": "Sodium Benzoate is a preservative commonly used in foods and drinks.",
+                    "Diseases": "May cause hyperactivity, allergic reactions.",
+                    "Solution": "Avoid foods with high levels of sodium benzoate."
+                }
+            },
+            "Paracetamol": {
+                "ld50": 1944,
+                "qsarRisk": 0.03,
+                "details": {
+                    "Description": "Paracetamol, also known as acetaminophen, is a widely used pain reliever.",
+                    "Diseases": "Overdose can cause liver damage.",
+                    "Solution": "Use only as directed; do not exceed recommended dose."
+                }
+            },
+            "Nicotine": {
+                "ld50": 50,
+                "qsarRisk": 0.08,
+                "details": {
+                    "Description": "Nicotine is a stimulant found in tobacco products.",
+                    "Diseases": "Highly addictive; can lead to heart disease, lung disease, and cancer.",
+                    "Solution": "Avoid tobacco products; seek help to quit smoking."
+                }
+            },
+            "Sodium Nitrite": {
+                "ld50": 180,
+                "qsarRisk": 0.06,
+                "details": {
+                    "Description": "Sodium Nitrite is a preservative used in processed meats.",
+                    "Diseases": "May form carcinogenic nitrosamines in the body.",
+                    "Solution": "Limit consumption of processed meats."
+                }
+            },
+            "Monosodium Glutamate": {
+                "ld50": 15000,
+                "qsarRisk": 0.01,
+                "details": {
+                    "Description": "MSG is a flavor enhancer used in various foods.",
+                    "Diseases": "May cause headaches or other symptoms in sensitive individuals.",
+                    "Solution": "Avoid foods with high MSG content if sensitive."
+                }
+            },
+            "Saccharin": {
+                "ld50": 17000,
+                "qsarRisk": 0.01,
+                "details": {
+                    "Description": "Saccharin is an artificial sweetener used in many low-calorie products.",
+                    "Diseases": "Linked to bladder cancer in animal studies.",
+                    "Solution": "Use alternative sweeteners if concerned."
+                }
+            },
+            "Acesulfame K": {
+                "ld50": 9000,
+                "qsarRisk": 0.01,
+                "details": {
+                    "Description": "Acesulfame K is a calorie-free sweetener used in various products.",
+                    "Diseases": "May affect thyroid function in high doses.",
+                    "Solution": "Monitor intake if using regularly."
+                }
+            },
+            "Cyclamate": {
+                "ld50": 12700,
+                "qsarRisk": 0.02,
+                "details": {
+                    "Description": "Cyclamate is an artificial sweetener banned in some countries.",
+                    "Diseases": "Linked to cancer in some animal studies.",
+                    "Solution": "Use alternative sweeteners if available."
+                }
+            },
+            "Ibuprofen": {
+                "ld50": 636,
+                "qsarRisk": 0.04,
+                "details": {
+                    "Description": "Ibuprofen is a nonsteroidal anti-inflammatory drug (NSAID).",
+                    "Diseases": "Can cause gastrointestinal issues and kidney damage.",
+                    "Solution": "Use only as directed; avoid long-term use."
+                }
+            },
+            "Acetaminophen": {
+                "ld50": 338,
+                "qsarRisk": 0.03,
+                "details": {
+                    "Description": "Acetaminophen is a common pain reliever and fever reducer.",
+                    "Diseases": "Overdose can cause liver failure.",
+                    "Solution": "Follow dosage guidelines carefully."
+                }
+            },
+            "Ethanol": {
+                "ld50": 7060,
+                "qsarRisk": 0.02,
+                "details": {
+                    "Description": "Ethanol is the active ingredient in alcoholic beverages.",
+                    "Diseases": "Chronic use can lead to liver disease, addiction.",
+                    "Solution": "Consume alcohol in moderation."
+                }
+            },
+            "Benzene": {
+                "ld50": 930,
+                "qsarRisk": 0.06,
+                "details": {
+                    "Description": "Benzene is an industrial chemical found in plastics and other products.",
+                    "Diseases": "Exposure can lead to leukemia and other cancers.",
+                    "Solution": "Limit exposure in work environments; use protective equipment."
+                }
+            },
+            "Formaldehyde": {
+                "ld50": 100,
+                "qsarRisk": 0.08,
+                "details": {
+                    "Description": "Formaldehyde is used in building materials and household products.",
+                    "Diseases": "Linked to cancer, respiratory issues.",
+                    "Solution": "Ensure proper ventilation when using products containing formaldehyde."
+                }
+            },
+            "Propylene Glycol": {
+                "ld50": 22000,
+                "qsarRisk": 0.01,
+                "details": {
+                    "Description": "Propylene Glycol is used as a food additive and in antifreeze.",
+                    "Diseases": "Generally recognized as safe, but can cause skin irritation in some.",
+                    "Solution": "Use skin care products with alternative ingredients if irritation occurs."
+                }
+            },
+            "Methanol": {
+                "ld50": 5628,
+                "qsarRisk": 0.03,
+                "details": {
+                    "Description": "Methanol is used as a solvent, antifreeze, and in fuel.",
+                    "Diseases": "Toxic if ingested; can cause blindness, death.",
+                    "Solution": "Use methanol with care; avoid ingestion."
+                }
+            },
+            "Toluene": {
+                "ld50": 636,
+                "qsarRisk": 0.05,
+                "details": {
+                    "Description": "Toluene is used as a solvent in paints and adhesives.",
+                    "Diseases": "Inhalation can cause neurological damage.",
+                    "Solution": "Use in well-ventilated areas; wear protective gear."
+                }
+            },
+            "Chlorpyrifos": {
+                "ld50": 96,
+                "qsarRisk": 0.07,
+                "details": {
+                    "Description": "Chlorpyrifos is an organophosphate pesticide.",
+                    "Diseases": "Linked to developmental disorders and neurological effects.",
+                    "Solution": "Use alternative pest control methods if possible."
+                }
+            },
+            "Atrazine": {
+                "ld50": 672,
+                "qsarRisk": 0.04,
+                "details": {
+                    "Description": "Atrazine is a widely used herbicide.",
+                    "Diseases": "Possible endocrine disruptor, linked to cancer.",
+                    "Solution": "Use protective equipment when applying."
+                }
+            },
+            "Glyphosate": {
+                "ld50": 5600,
+                "qsarRisk": 0.02,
+                "details": {
+                    "Description": "Glyphosate is the active ingredient in many herbicides.",
+                    "Diseases": "Linked to cancer and other health effects.",
+                    "Solution": "Use protective equipment when applying."
+                }
+            },
+            "DDT": {
+                "ld50": 113,
+                "qsarRisk": 0.06,
+                "details": {
+                    "Description": "DDT is a banned pesticide due to its environmental and health impacts.",
+                    "Diseases": "Causes reproductive issues, cancer.",
+                    "Solution": "Avoid exposure in contaminated areas."
+                }
+            },
+            "Lead Acetate": {
+                "ld50": 466,
+                "qsarRisk": 0.05,
+                "details": {
+                    "Description": "Lead Acetate is used in some hair dyes and other products.",
+                    "Diseases": "Toxic to the nervous system, especially in children.",
+                    "Solution": "Avoid products containing lead; use safer alternatives."
+                }
+            },
+            "Sodium Fluoride": {
+                "ld50": 52,
+                "qsarRisk": 0.07,
+                "details": {
+                    "Description": "Sodium Fluoride is used in dental products and water fluoridation.",
+                    "Diseases": "High doses can cause fluorosis and other health issues.",
+                    "Solution": "Use dental products as directed; monitor fluoride intake."
+                }
+            },
+            "Thalidomide": {
+                "ld50": 1000,
+                "qsarRisk": 0.03,
+                "details": {
+                    "Description": "Thalidomide is a drug used for certain cancers and other conditions.",
+                    "Diseases": "Causes severe birth defects if taken during pregnancy.",
+                    "Solution": "Avoid use during pregnancy; follow medical advice."
+                }
+            }
         };
 
-        // Populate the chemical dropdown
-        const chemicalSelect = document.getElementById('chemical');
-        for (const chemical in chemicalData) {
-            const option = document.createElement('option');
-            option.value = chemical;
-            option.textContent = chemical;
-            chemicalSelect.appendChild(option);
-        }
-
-        // Calculate risk level
-        document.getElementById('calculate').addEventListener('click', () => {
+        document.getElementById('calculate').addEventListener('click', function () {
             const chemical = document.getElementById('chemical').value;
             const age = parseFloat(document.getElementById('age').value);
-            const bodyWeight = parseFloat(document.getElementById('body-weight').value);
+            const weight = parseFloat(document.getElementById('body-weight').value);
             const concentration = parseFloat(document.getElementById('concentration').value);
             const exposure = parseFloat(document.getElementById('exposure').value);
             const ld50 = parseFloat(document.getElementById('ld50').value);
 
-            if (!chemical || isNaN(age) || isNaN(bodyWeight) || isNaN(concentration) || isNaN(exposure) || isNaN(ld50)) {
-                alert('Please fill in all fields correctly.');
-                return;
-            }
+            if (chemical && !isNaN(age) && !isNaN(weight) && !isNaN(concentration) && !isNaN(exposure) && !isNaN(ld50)) {
+                const qsarRisk = chemicalData[chemical].qsarRisk;
+                const calculatedRisk = (concentration * exposure) / (weight * ld50);
 
-            const data = chemicalData[chemical];
-            const qsarRisk = data.qsarRisk;
+                document.getElementById('qsar-risk').textContent = qsarRisk.toFixed(5);
+                document.getElementById('calculated-risk').textContent = calculatedRisk.toFixed(5);
 
-            // Calculate risk level
-            const calculatedRisk = (concentration * exposure) / (bodyWeight * ld50);
-
-            // Update results
-            document.getElementById('qsar-risk').textContent = qsarRisk.toFixed(4);
-            document.getElementById('calculated-risk').textContent = calculatedRisk.toExponential(4);
-            document.getElementById('risk-classification').textContent = getRiskClassification(calculatedRisk);
-
-            // Update chemical details
-            document.getElementById('description').textContent = data.details.Description;
-            document.getElementById('diseases').textContent = data.details.Diseases;
-            document.getElementById('solution').textContent = data.details.Solution;
-
-            // Generate graph
-            generateGraph(qsarRisk, calculatedRisk);
-
-            // Update collected data section
-            updateDataContainer();
-        });
-
-        // Get risk classification
-        function getRiskClassification(riskLevel) {
-            if (riskLevel > 0.1) return 'High';
-            if (riskLevel > 0.01) return 'Moderate';
-            return 'Low';
-        }
-
-        // Generate graph
-        function generateGraph(qsarRisk, calculatedRisk) {
-            const ctx = document.getElementById('risk-graph').getContext('2d');
-
-            // Destroy existing chart if it exists
-            if (window.riskChart) {
-                window.riskChart.destroy();
-            }
-
-            window.riskChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['QSAR Predicted', 'Calculated'],
-                    datasets: [{
-                        label: 'Risk Levels',
-                        data: [qsarRisk, calculatedRisk],
-                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
-                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-
-        // Update collected data section
-        function updateDataContainer() {
-            const dataContainer = document.getElementById('data-container');
-            let tableHtml = `
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Chemical</th>
-                            <th>Age</th>
-                            <th>Body Weight</th>
-                            <th>Concentration</th>
-                            <th>Exposure</th>
-                            <th>LD50</th>
-                            <th>Calculated Risk Level</th>
-                            <th>QSAR Risk Level</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>${document.getElementById('chemical').value}</td>
-                            <td>${document.getElementById('age').value}</td>
-                            <td>${document.getElementById('body-weight').value}</td>
-                            <td>${document.getElementById('concentration').value}</td>
-                            <td>${document.getElementById('exposure').value}</td>
-                            <td>${document.getElementById('ld50').value}</td>
-                            <td>${(document.getElementById('calculated-risk').textContent)}</td>
-                            <td>${(document.getElementById('qsar-risk').textContent)}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-            dataContainer.innerHTML = tableHtml;
-        }
-    </script>
-</body>
-</html>
