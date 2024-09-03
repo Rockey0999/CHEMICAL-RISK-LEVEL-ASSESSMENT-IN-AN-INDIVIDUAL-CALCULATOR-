@@ -3,142 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chemical Risk Assessment</title>
+    <title>Chemical Risk Assessment - Science Expo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: #f0f8ff;
+            color: #333;
+        }
+        header {
+            background-color: #007acc;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin: 0;
         }
         .container {
             width: 80%;
             margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        h1 {
-            text-align: center;
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 1rem;
         }
         label {
             display: block;
-            margin: 10px 0 5px;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
         }
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+        input, select, button {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
             border: 1px solid #ddd;
             border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
         }
         button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #007bff;
+            background-color: #56ce27;
             color: #fff;
+            border: none;
             cursor: pointer;
-            border-radius: 4px;
+            font-size: 1rem;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #56ce27;
         }
-        .results, .details, .graph-container {
-            margin-top: 20px;
+        footer {
+            background-color: #007acc;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
         }
-        .results table, .details table {
+        #data-container {
+            background: #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        .data-table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 10px;
         }
-        .results th, .details th, .results td, .details td {
-            padding: 10px;
+        .data-table th, .data-table td {
+            padding: 8px;
             border: 1px solid #ddd;
+            text-align: left;
         }
-        .results th, .details th {
-            background-color: #f2f2f2;
-        }
-        .graph-container {
-            width: 100%;
-            margin-top: 20px;
-        }
-        .graph-container canvas {
-            width: 100%;
-            height: 400px;
+        .data-table th {
+            background-color: #007acc;
+            color: rgb(198, 210, 214);
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Chemical Risk Assessment - Science Expo</h1>
+        <p>Under the Topic: Mathematical Modeling and Computational Thinking</p>
+    </header>
     <div class="container">
-        <h1>Chemical Risk Assessment</h1>
-        <label for="chemical">Select Chemical:</label>
-        <select id="chemical">
-            <option value="Paracetamol">Paracetamol</option>
-            <option value="Nicotine">Nicotine</option>
-            <option value="Sodium Nitrite">Sodium Nitrite</option>
-            <option value="Monosodium Glutamate">Monosodium Glutamate</option>
-            <option value="Saccharin">Saccharin</option>
-            <option value="Acesulfame K">Acesulfame K</option>
-            <option value="Cyclamate">Cyclamate</option>
-            <option value="Ibuprofen">Ibuprofen</option>
-            <option value="Acetaminophen">Acetaminophen</option>
-            <option value="Ethanol">Ethanol</option>
-            <option value="Benzene">Benzene</option>
-            <option value="Formaldehyde">Formaldehyde</option>
-            <option value="Propylene Glycol">Propylene Glycol</option>
-            <option value="Methanol">Methanol</option>
-            <option value="Toluene">Toluene</option>
-            <option value="Chlorpyrifos">Chlorpyrifos</option>
-            <option value="Atrazine">Atrazine</option>
-            <option value="Glyphosate">Glyphosate</option>
-            <option value="DDT">DDT</option>
-            <option value="Lead Acetate">Lead Acetate</option>
-            <option value="Sodium Fluoride">Sodium Fluoride</option>
-            <option value="Thalidomide">Thalidomide</option>
-        </select>
-
-        <label for="age">Age (years):</label>
-        <input type="number" id="age" min="0">
-
-        <label for="body-weight">Body Weight (kg):</label>
-        <input type="number" id="body-weight" min="0">
-
-        <label for="concentration">Concentration (mg/L):</label>
-        <input type="number" id="concentration" min="0">
-
-        <label for="exposure">Exposure (hours):</label>
-        <input type="number" id="exposure" min="0">
-
-        <label for="ld50">LD50 (mg/kg):</label>
-        <input type="number" id="ld50" min="0">
-
-        <button id="calculate">Calculate Risk</button>
-
-        <div class="results">
-            <h2>Results</h2>
-            <p><strong>QSAR Predicted Risk:</strong> <span id="qsar-risk">-</span></p>
-            <p><strong>Calculated Risk:</strong> <span id="calculated-risk">-</span></p>
-            <p><strong>Risk Classification:</strong> <span id="risk-classification">-</span></p>
-        </div>
-
-        <div class="details">
-            <h2>Chemical Details</h2>
-            <p><strong>Description:</strong> <span id="description">-</span></p>
-            <p><strong>Diseases:</strong> <span id="diseases">-</span></p>
-            <p><strong>Solution:</strong> <span id="solution">-</span></p>
-        </div>
-
-        <div class="graph-container">
-            <h2>Risk Level Comparison</h2>
-            <canvas id="risk-graph"></canvas>
+        <div class="card">
+            <h2>Chemical Risk Level Calculator</h2>
+            <div class="form-group">
+                <label for="chemical">Select Chemical:</label>
+                <select id="chemical">
+                    <option value="" disabled selected>Select a chemical</option>
+                    <!-- Options will be added by JavaScript -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="age">Age (years):</label>
+                <input type="number" id="age" min="0">
+            </div>
+            <div class="form-group">
+                <label for="body-weight">Body Weight (kg):</label>
+                <input type="number" id="body-weight" min="0">
+            </div>
+            <div class="form-group">
+                <label for="concentration">Concentration (c) in mg/kg:</label>
+                <input type="number" id="concentration" step="any">
+            </div>
+            <div class="form-group">
+                <label for="exposure">Exposure (e) in kg/day:</label>
+                <input type="number" id="exposure" step="any">
+            </div>
+            <div class="form-group">
+                <label for="ld50">LD50 of Chemical (mg/kg):</label>
+                <input type="number" id="ld50" step="any">
+            </div>
+            <button id="calculate">Calculate Your Risklevel</button>
+            <div id="results">
+                <h2>Results</h2>
+                <p><strong>QSAR Predicted Risk Level:</strong> <span id="qsar-risk"></span></p>
+                <p><strong>Calculated Risk Level:</strong> <span id="calculated-risk"></span></p>
+                <p><strong>Risk Level Classification:</strong> <span id="risk-classification"></span></p>
+            </div>
+            <div id="chemical-details">
+                <h2>Chemical Details</h2>
+                <p><strong>Description:</strong> <span id="description"></span></p>
+                <p><strong>Diseases Caused:</strong> <span id="diseases"></span></p>
+                <p><strong>Solution:</strong> <span id="solution"></span></p>
+            </div>
+            <div class="card">
+                <h2>Graphical Analysis</h2>
+                <div class="chart-container">
+                    <canvas id="risk-graph" width="400" height="200"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Collected Data</h2>
+                <div id="data-container"></div>
+            </div>
         </div>
     </div>
-
+    <footer>
+        <p>&copy; 2024 Science Expo - Chemical Risk Assessment in an individuals /n TEAM:MIRS /n ROHIT DHANYAA KANNAN /n RAM CHARAN</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const chemicalData = {
+            "Caffeine": {
+                "ld50": 192,
+                "qsarRisk": 0.05,
+                "details": {
+                    "Description": "Caffeine is a stimulant found in coffee, tea, and various other products.",
+                    "Diseases": "May cause insomnia, nervousness, restlessness, stomach irritation.",
+                    "Solution": "Limit intake of caffeinated beverages."
+                }
+            },
+            "Aspartame": {
+                "ld50": 5000,
+                "qsarRisk": 0.01,
+                "details": {
+                    "Description": "Aspartame is an artificial sweetener used in many low-calorie products.",
+                    "Diseases": "May cause headaches or allergic reactions in some individuals.",
+                    "Solution": "Monitor intake if sensitive to aspartame."
+                }
+            },
+            "Sodium Benzoate": {
+                "ld50": 4070,
+                "qsarRisk": 0.02,
+                "details": {
+                    "Description": "Sodium Benzoate is a preservative commonly used in foods and drinks.",
+                    "Diseases": "May cause hyperactivity, allergic reactions.",
+                    "Solution": "Avoid foods with high levels of sodium benzoate."
+                }
+            },
             "Paracetamol": {
-                "ld50": 338,
+                "ld50": 1944,
                 "qsarRisk": 0.03,
                 "details": {
                     "Description": "Paracetamol, also known as acetaminophen, is a widely used pain reliever.",
@@ -214,130 +280,140 @@
                 "qsarRisk": 0.03,
                 "details": {
                     "Description": "Acetaminophen is a common pain reliever and fever reducer.",
-                    "Diseases": "Overdose can lead to severe liver damage.",
-                    "Solution": "Do not exceed recommended dose."
+                    "Diseases": "Overdose can cause liver failure.",
+                    "Solution": "Follow dosage guidelines carefully."
                 }
             },
             "Ethanol": {
                 "ld50": 7060,
                 "qsarRisk": 0.02,
                 "details": {
-                    "Description": "Ethanol is the type of alcohol found in beverages.",
-                    "Diseases": "Excessive consumption can cause liver disease and addiction.",
-                    "Solution": "Limit alcohol consumption."
+                    "Description": "Ethanol is the active ingredient in alcoholic beverages.",
+                    "Diseases": "Chronic use can lead to liver disease, addiction.",
+                    "Solution": "Consume alcohol in moderation."
                 }
             },
             "Benzene": {
                 "ld50": 930,
-                "qsarRisk": 0.07,
+                "qsarRisk": 0.06,
                 "details": {
-                    "Description": "Benzene is a volatile organic compound found in gasoline and industrial emissions.",
-                    "Diseases": "Carcinogen; can cause leukemia.",
-                    "Solution": "Avoid exposure; use protective equipment if necessary."
+                    "Description": "Benzene is an industrial chemical found in plastics and other products.",
+                    "Diseases": "Exposure can lead to leukemia and other cancers.",
+                    "Solution": "Limit exposure in work environments; use protective equipment."
                 }
             },
             "Formaldehyde": {
                 "ld50": 100,
-                "qsarRisk": 0.09,
+                "qsarRisk": 0.08,
                 "details": {
-                    "Description": "Formaldehyde is used in industrial applications and as a preservative.",
-                    "Diseases": "Carcinogen; can cause respiratory issues.",
-                    "Solution": "Ensure proper ventilation and use protective gear."
+                    "Description": "Formaldehyde is used in building materials and household products.",
+                    "Diseases": "Linked to cancer, respiratory issues.",
+                    "Solution": "Ensure proper ventilation when using products containing formaldehyde."
                 }
             },
             "Propylene Glycol": {
-                "ld50": 20000,
+                "ld50": 22000,
                 "qsarRisk": 0.01,
                 "details": {
-                    "Description": "Propylene glycol is used as a solvent in various products.",
-                    "Diseases": "Generally considered safe but can cause skin irritation in some people.",
-                    "Solution": "Use with caution if sensitive."
+                    "Description": "Propylene Glycol is used as a food additive and in antifreeze.",
+                    "Diseases": "Generally recognized as safe, but can cause skin irritation in some.",
+                    "Solution": "Use skin care products with alternative ingredients if irritation occurs."
                 }
             },
             "Methanol": {
-                "ld50": 300,
-                "qsarRisk": 0.05,
+                "ld50": 5628,
+                "qsarRisk": 0.03,
                 "details": {
-                    "Description": "Methanol is a type of alcohol used industrially and as a fuel.",
-                    "Diseases": "Toxic; can cause blindness and organ damage.",
-                    "Solution": "Avoid ingestion; use with proper safety measures."
+                    "Description": "Methanol is used as a solvent, antifreeze, and in fuel.",
+                    "Diseases": "Toxic if ingested; can cause blindness, death.",
+                    "Solution": "Use methanol with care; avoid ingestion."
                 }
             },
             "Toluene": {
-                "ld50": 2500,
-                "qsarRisk": 0.03,
+                "ld50": 636,
+                "qsarRisk": 0.05,
                 "details": {
-                    "Description": "Toluene is used as a solvent in paints and coatings.",
-                    "Diseases": "Can cause neurological damage and respiratory issues.",
-                    "Solution": "Use in well-ventilated areas; wear protective equipment."
+                    "Description": "Toluene is used as a solvent in paints and adhesives.",
+                    "Diseases": "Inhalation can cause neurological damage.",
+                    "Solution": "Use in well-ventilated areas; wear protective gear."
                 }
             },
             "Chlorpyrifos": {
-                "ld50": 120,
-                "qsarRisk": 0.08,
+                "ld50": 96,
+                "qsarRisk": 0.07,
                 "details": {
                     "Description": "Chlorpyrifos is an organophosphate pesticide.",
-                    "Diseases": "Can cause neurological and developmental issues.",
-                    "Solution": "Use with caution and follow safety guidelines."
+                    "Diseases": "Linked to developmental disorders and neurological effects.",
+                    "Solution": "Use alternative pest control methods if possible."
                 }
             },
             "Atrazine": {
-                "ld50": 1000,
-                "qsarRisk": 0.03,
+                "ld50": 672,
+                "qsarRisk": 0.04,
                 "details": {
-                    "Description": "Atrazine is a herbicide used to control weeds.",
-                    "Diseases": "Can affect endocrine function and reproductive health.",
-                    "Solution": "Follow application guidelines and minimize exposure."
+                    "Description": "Atrazine is a widely used herbicide.",
+                    "Diseases": "Possible endocrine disruptor, linked to cancer.",
+                    "Solution": "Use protective equipment when applying."
                 }
             },
             "Glyphosate": {
-                "ld50": 5000,
+                "ld50": 5600,
                 "qsarRisk": 0.02,
                 "details": {
-                    "Description": "Glyphosate is a widely used herbicide.",
-                    "Diseases": "Possible link to cancer and other health issues.",
-                    "Solution": "Use protective measures when applying."
+                    "Description": "Glyphosate is the active ingredient in many herbicides.",
+                    "Diseases": "Linked to cancer and other health effects.",
+                    "Solution": "Use protective equipment when applying."
                 }
             },
             "DDT": {
                 "ld50": 113,
-                "qsarRisk": 0.09,
+                "qsarRisk": 0.06,
                 "details": {
-                    "Description": "DDT is a pesticide that has been banned in many countries.",
-                    "Diseases": "Carcinogenic and can affect reproductive health.",
-                    "Solution": "Avoid exposure; use alternative pest control methods."
+                    "Description": "DDT is a banned pesticide due to its environmental and health impacts.",
+                    "Diseases": "Causes reproductive issues, cancer.",
+                    "Solution": "Avoid exposure in contaminated areas."
                 }
             },
             "Lead Acetate": {
-                "ld50": 20,
-                "qsarRisk": 0.10,
+                "ld50": 466,
+                "qsarRisk": 0.05,
                 "details": {
-                    "Description": "Lead acetate is a lead compound used in some industrial applications.",
-                    "Diseases": "Highly toxic; can cause lead poisoning and organ damage.",
-                    "Solution": "Minimize exposure and use protective equipment."
+                    "Description": "Lead Acetate is used in some hair dyes and other products.",
+                    "Diseases": "Toxic to the nervous system, especially in children.",
+                    "Solution": "Avoid products containing lead; use safer alternatives."
                 }
             },
             "Sodium Fluoride": {
                 "ld50": 52,
-                "qsarRisk": 0.09,
+                "qsarRisk": 0.07,
                 "details": {
-                    "Description": "Sodium fluoride is used in dental products and as a pesticide.",
-                    "Diseases": "Can cause dental and skeletal fluorosis.",
-                    "Solution": "Use fluoride products as directed; avoid excessive exposure."
+                    "Description": "Sodium Fluoride is used in dental products and water fluoridation.",
+                    "Diseases": "High doses can cause fluorosis and other health issues.",
+                    "Solution": "Use dental products as directed; monitor fluoride intake."
                 }
             },
             "Thalidomide": {
-                "ld50": 500,
-                "qsarRisk": 0.06,
+                "ld50": 1000,
+                "qsarRisk": 0.03,
                 "details": {
-                    "Description": "Thalidomide was used as a sedative and for morning sickness.",
-                    "Diseases": "Can cause severe birth defects and limb malformations.",
-                    "Solution": "Not recommended for use during pregnancy."
+                    "Description": "Thalidomide is a drug used for certain cancers and other conditions.",
+                    "Diseases": "Causes severe birth defects if taken during pregnancy.",
+                    "Solution": "Avoid use during pregnancy; follow medical advice."
                 }
             }
         };
 
-        document.getElementById('calculate').addEventListener('click', function() {
+        // Populate the chemical dropdown
+        const chemicalSelect = document.getElementById('chemical');
+        for (const chemical in chemicalData) {
+            const option = document.createElement('option');
+            option.value = chemical;
+            option.textContent = chemical;
+            chemicalSelect.appendChild(option);
+        }
+
+        // Calculate risk level
+        document.getElementById('calculate').addEventListener('click', () => {
             const chemical = document.getElementById('chemical').value;
             const age = parseFloat(document.getElementById('age').value);
             const bodyWeight = parseFloat(document.getElementById('body-weight').value);
@@ -345,35 +421,49 @@
             const exposure = parseFloat(document.getElementById('exposure').value);
             const ld50 = parseFloat(document.getElementById('ld50').value);
 
-            if (chemicalData[chemical] && age && bodyWeight && concentration && exposure && ld50) {
-                const qsarRisk = chemicalData[chemical].qsarRisk;
-                const calculatedRisk = (concentration * exposure * 0.1) / (bodyWeight * 1.5 * ld50);
-                document.getElementById('qsar-risk').textContent = qsarRisk.toFixed(4);
-                document.getElementById('calculated-risk').textContent = calculatedRisk.toFixed(4);
-                
-                const classification = getRiskClassification(calculatedRisk);
-                document.getElementById('risk-classification').textContent = classification;
-
-                const details = chemicalData[chemical].details;
-                document.getElementById('description').textContent = details.Description;
-                document.getElementById('diseases').textContent = details.Diseases;
-                document.getElementById('solution').textContent = details.Solution;
-
-                generateGraph(qsarRisk, calculatedRisk);
-            } else {
+            if (!chemical || isNaN(age) || isNaN(bodyWeight) || isNaN(concentration) || isNaN(exposure) || isNaN(ld50)) {
                 alert('Please fill in all fields correctly.');
+                return;
             }
+
+            const data = chemicalData[chemical];
+            const qsarRisk = data.qsarRisk;
+
+            // Calculate risk level
+            const calculatedRisk = (concentration * exposure) / (bodyWeight * ld50);
+
+            // Update results
+            document.getElementById('qsar-risk').textContent = qsarRisk.toFixed(4);
+            document.getElementById('calculated-risk').textContent = calculatedRisk.toExponential(4);
+            document.getElementById('risk-classification').textContent = getRiskClassification(calculatedRisk);
+
+            // Update chemical details
+            document.getElementById('description').textContent = data.details.Description;
+            document.getElementById('diseases').textContent = data.details.Diseases;
+            document.getElementById('solution').textContent = data.details.Solution;
+
+            // Generate graph
+            generateGraph(qsarRisk, calculatedRisk);
+
+            // Update collected data section
+            updateDataContainer();
         });
 
+        // Get risk classification
         function getRiskClassification(riskLevel) {
             if (riskLevel > 0.1) return 'High';
             if (riskLevel > 0.01) return 'Moderate';
             return 'Low';
         }
 
+        // Generate graph
         function generateGraph(qsarRisk, calculatedRisk) {
             const ctx = document.getElementById('risk-graph').getContext('2d');
-            if (window.riskChart) window.riskChart.destroy();
+
+            // Destroy existing chart if it exists
+            if (window.riskChart) {
+                window.riskChart.destroy();
+            }
 
             window.riskChart = new Chart(ctx, {
                 type: 'bar',
@@ -395,6 +485,40 @@
                     }
                 }
             });
+        }
+
+        // Update collected data section
+        function updateDataContainer() {
+            const dataContainer = document.getElementById('data-container');
+            let tableHtml = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Chemical</th>
+                            <th>Age</th>
+                            <th>Body Weight</th>
+                            <th>Concentration</th>
+                            <th>Exposure</th>
+                            <th>LD50</th>
+                            <th>Calculated Risk Level</th>
+                            <th>QSAR Risk Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>${document.getElementById('chemical').value}</td>
+                            <td>${document.getElementById('age').value}</td>
+                            <td>${document.getElementById('body-weight').value}</td>
+                            <td>${document.getElementById('concentration').value}</td>
+                            <td>${document.getElementById('exposure').value}</td>
+                            <td>${document.getElementById('ld50').value}</td>
+                            <td>${(document.getElementById('calculated-risk').textContent)}</td>
+                            <td>${(document.getElementById('qsar-risk').textContent)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            dataContainer.innerHTML = tableHtml;
         }
     </script>
 </body>
