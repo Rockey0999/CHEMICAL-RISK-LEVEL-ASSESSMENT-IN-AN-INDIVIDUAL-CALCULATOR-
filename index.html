@@ -430,7 +430,7 @@
             const qsarRisk = data.qsarRisk;
 
             // Calculate risk level
-            const calculatedRisk = (concentration * exposure) / (bodyWeight * ld50);
+            const calculatedRisk = (concentration * exposure*(age/50)*(75/body-weight) /  ld50;
 
             // Update results
             document.getElementById('qsar-risk').textContent = qsarRisk.toFixed(4);
